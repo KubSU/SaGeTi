@@ -43,7 +43,7 @@ void CPicture::_InitBackground()
 {
 	for (int i = 0; i < SIZE; i++)
 		for (int j = 0; j < SIZE; j++)
-			if (_Function->Function(i, j))
+			if (_Function->Function(i - 300, j - 300))
 				_NewData[i][j] = 15;
 			else
 				_NewData[i][j] = 0;
