@@ -1,6 +1,7 @@
 #include "CPicture.hxx"
 #include "CGraph.hxx"
 #include <cstring>
+#include <cmath>
 
 #define SIZE 600
 #define HALF_SIZE SIZE / 2
@@ -14,6 +15,9 @@ CPicture::CPicture()
 	_OldData = new char*[SIZE];
 	for (int i = 0; i < SIZE; i++)
 		_OldData[i] = new char[SIZE];
+	
+	FunctionParameters = 0;
+	FunctionCount = 0;
 };
 
 void CPicture::Init()
@@ -46,25 +50,40 @@ void CPicture::Update()
 	_SwapDataArrays();
 };
 
+void CPicture::ReadBackgroundFunctions(fstream& Stream){
+	Stream >> FunctionCount;
+	FunctionParameters = new TFunctionParameters[FunctionCount];
+	for (int i = 0; i < FunctionCount; i++)
+	{
+		//============
+		Stream >> FunctionParameters[i].x;
+		Stream >> FunctionParameters[i].d >> FunctionParameters[i].c;
+		//============
+	}
+	//===========
+	Stream >> FunctionParameters2[1].A >> FunctionParameters2[1].phi >> FunctionParameters2[1].r;
+	Stream >> FunctionParameters2[0].A >> FunctionParameters2[0].phi >> FunctionParameters2[0].r;
+	//===========
+	
+};
+
 void CPicture::_InitBackground()
 {
-	for (int i = 0; i < SIZE; i++)
-		for (int j = 0; j < SIZE; j++)
-			if (_Function->Function(i - HALF_SIZE, j - HALF_SIZE))
-				_NewData[i][j] = 15;
-			else
-				_NewData[i][j] = 0;
-	
+	//============
+	for (int k = 0; k < FunctionCount; k++)
+	{
+		for (int i = 0; i < SIZE; i++)
+			for (int j = 0; j < SIZE; j++)
+				if ((FunctionParameters2[0].A*sinf(FunctionParameters2[0].r*(j)-FunctionParameters2[0].phi)>i-500)&&
+					(FunctionParameters2[1].A*sinf(FunctionParameters2[1].r*(j)-FunctionParameters2[1].phi)<i-400))
+					_NewData[i][j] = FunctionParameters[k].c;
+	}
 	_SwapDataArrays();
+	//============
 };
 
 void CPicture::_SwapDataArrays()
 {
-	/*
-	TPictureData temp = _OldData;
-	_OldData = _NewData;
-	_NewData = temp;
-	*/
 	for (int i = 0; i < SIZE; i++)
 		memcpy(_OldData[i], _NewData[i], SIZE);
 };

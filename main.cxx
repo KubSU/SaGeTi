@@ -65,6 +65,7 @@ int main(int argc, char const *argv[])
 		{
 			graph->ReadFromFile(input);
 			function->ReadFromStream(input);
+			picture->ReadBackgroundFunctions(input);
 		};
 
 		input.close();
