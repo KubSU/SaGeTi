@@ -41,6 +41,16 @@ void SanFunction::ReadFromStream(fstream &InputStream)
 	}
 }
 
+SanFunction::SanFunction()
+{
+	A = 1;
+	B = 1;
+}
+
+SanFunction::~SanFunction()
+{
+}
+
 bool SanFunction::Function(float X, float Y)
 {
 	return fabsf((X-x0)*(X-x0)/(A*A)+(Y-y0)*(Y-y0)/(B*B))<1.06;
@@ -52,6 +62,17 @@ void JorFunction::ReadFromStream(fstream &InputStream)
 	InputStream>>x0;
 	InputStream>>y0;
 	InputStream>>P;
+}
+
+JorFunction::JorFunction()
+{
+	x0 = 1;
+	y0 = 1;
+	P = 1;
+}
+
+JorFunction::~JorFunction()
+{
 }
 
 bool JorFunction::Function(float X, float Y)
