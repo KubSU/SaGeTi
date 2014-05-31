@@ -2,7 +2,9 @@
 #define _PICTURE_H
 #include "IFunction.hxx"
 
-typedef char** TPictureData; 
+typedef char** TPictureData;
+
+class CGraph;
 
 class CPicture
 {
@@ -11,7 +13,7 @@ private:
 	TPictureData _OldData;
 	
 	IFunction* _Function;
-	
+	CGraph* _Graph;
 	
 	void _InitBackground();
 	void _SwapDataArrays();
@@ -22,6 +24,7 @@ public:
 	TPictureData GetData();
 	void Update();
 	void SetFunction(IFunction* Function);
+	void SetGraph(CGraph* Graph);
 };
 
 #endif

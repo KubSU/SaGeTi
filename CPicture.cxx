@@ -1,4 +1,5 @@
 #include "CPicture.hxx"
+#include "CGraph.hxx"
 
 #define SIZE 600
 #define HALF_SIZE SIZE / 2
@@ -37,7 +38,10 @@ TPictureData CPicture::GetData()
 
 void CPicture::Update()
 {
-	
+	for (int i = 0; i < SIZE; i++)
+		for (int j = 0; j < SIZE; j++)
+			if (_Function->Function(i - HALF_SIZE, j - HALF_SIZE))
+				_Graph->ApplyGraphToAr(i, j, _NewData, _OldData);
 };
 
 void CPicture::_InitBackground()
@@ -62,4 +66,9 @@ void CPicture::_SwapDataArrays()
 void CPicture::SetFunction(IFunction *Function)
 {
 	_Function = Function;
-}
+};
+
+void CPicture::SetGraph(CGraph* Graph)
+{
+	_Graph = Graph;
+};

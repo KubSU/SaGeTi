@@ -1,6 +1,10 @@
 #ifndef _GRAPH_H
 #define _GRAPH_H
-#include "CPicture.hxx"
+
+#include <fstream>
+
+typedef char** TPictureData;
+
 class CGraph {
 	int ms[4][4];
 	int mr[4][4];
@@ -12,6 +16,6 @@ public:
 	CGraph();
 	~CGraph();
 	void ApplyGraphToAr(int x,int y,TPictureData data);
-	void ReadFromFile(fstream Stream);
+	void ReadFromFile(std::fstream Stream);
 };
 #endif

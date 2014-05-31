@@ -90,6 +90,6 @@ void CRender::DrawPicture(CPicture *pPicture)
 		};
 	glDrawPixels(600, 600, GL_RGB, GL_UNSIGNED_BYTE, data);
 	glFinish();
-	delete []data;
 
+	delete []data;
 };
