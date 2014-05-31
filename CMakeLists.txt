@@ -8,6 +8,7 @@ add_subdirectory(glfw)
 set(Sources
 	main.cxx
 	CRender.cxx
+	CPicture.cxx
 )
 
 set(Headers

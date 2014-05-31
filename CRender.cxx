@@ -59,6 +59,17 @@ inline TPixel GetColor(char color){
 		return TPixel(1,1,1);
 		break;
 	}
+	return TPixel();
+};
+
+CRender::CRender()
+{
+	
+};
+
+CRender::~CRender()
+{
+	
 };
 
 void CRender::DrawPicture(CPicture *pPicture)
