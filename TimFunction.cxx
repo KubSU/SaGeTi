@@ -12,6 +12,17 @@ void TimFunction::ReadFromStream(fstream &InputStream)
 	}
 }
 
+TimFunction::TimFunction()
+{
+	A = 1;
+	B = 1;
+	C = 1;
+}
+
+TimFunction::~TimFunction()
+{
+}
+
 bool TimFunction::Function(float X, float Y)
 {
 	return fabsf(A*fabsf(X)+B*Y+C)<0.06;
