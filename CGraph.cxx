@@ -10,8 +10,11 @@ CGraph::~CGraph(){
 };
 void CGraph::ApplyGraphToAr(int x,int y,TPictureData data,TPictureData olddata){
 	for (int i = 0; i < 4; ++i) {
-		if (ms[lovely_point][i]!=UNUSIFUL_EDGE) {
-			data[x+sm[i][0]][y+sm[i][1]] = (olddata[x][y]+olddata[x+sm[i][0]][y+sm[i][1]]+ms[lovely_point][i]) % 16;
+		int X = x+sm[i][0];
+		int Y = y+sm[i][1];
+		
+		if ((ms[lovely_point-1][i]!=UNUSIFUL_EDGE)&&(Y>=0)&&(Y<600)&&(X>=0)&&(X<600)) {
+			data[X][Y] = (olddata[x][y]+olddata[X][Y]+ms[lovely_point-1][i]) % 16;
 		}
 	}
 };
