@@ -1,6 +1,7 @@
 #include "glfw3.h"
 #include "CRender.hxx"
 #include "CPicture.hxx"
+#include "TimFunction.hxx"
 
 bool _Running = true;
 GLFWwindow* window;
@@ -44,6 +45,7 @@ int main(int argc, char const *argv[])
 	
 	render = new CRender();
 	picture = new CPicture();
+	picture->SetFunction(new TimFunction());
 
 	window = glfwCreateWindow(600, 600, "GL window", NULL, NULL);
 	glfwMakeContextCurrent(window);

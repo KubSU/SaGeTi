@@ -9,12 +9,14 @@ set(Sources
 	main.cxx
 	CRender.cxx
 	CPicture.cxx
+	TimFunction.cxx
 )
 
 set(Headers
 	IFunction.hxx
 	CRender.hxx
 	CPicture.hxx
+	TimFunction.hxx
 )
 
 add_executable(CourseTask ${Sources} ${Headers})

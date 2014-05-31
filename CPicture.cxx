@@ -38,12 +38,13 @@ void CPicture::Update()
 
 void CPicture::_InitBackground()
 {
-	for (int i = 0; i < SIZE; i++) {
-		for (int j = 0; j < SIZE; j++) {
-			_NewData[i][j] = 0;
-		}
-	}
-	// Add lines
+	for (int i = 0; i < SIZE; i++)
+		for (int j = 0; j < SIZE; j++)
+			if (_Function->Function(i, j))
+				_NewData[i][j] = 15;
+			else
+				_NewData[i][j] = 0;
+	
 	_SwapDataArrays();
 };
 
@@ -52,4 +53,9 @@ void CPicture::_SwapDataArrays()
 	TPictureData temp = _OldData;
 	_OldData = _NewData;
 	_NewData = temp;
+};
+
+void CPicture::SetFunction(IFunction *Function)
+{
+	_Function = Function;
 }
