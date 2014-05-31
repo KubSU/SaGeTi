@@ -1,6 +1,6 @@
 #include "TimFunction.hxx"
 
-void TimFunction::ReadFromStream(fstream &InputStream);
+void TimFunction::ReadFromStream(fstream &InputStream)
 { 
 	InputStream>>A;
 	InputStream>>B;
@@ -11,17 +11,12 @@ void TimFunction::ReadFromStream(fstream &InputStream);
 	}
 }
 
-bool TimFunction::Function(float X, float Y);
+bool TimFunction::Function(float X, float Y)
 {
-	if (fabsf(A*fabsf(X)+B*Y+C)<0.06)	{
-	cout<<true;
-	} else {
-	cout<<false; 
-	}
-
+	return absf(A*absf(X)+B*Y+C)<0.06;
 }
 
-void SanFunction::ReadFromStream(fstream &InputStream);
+void SanFunction::ReadFromStream(fstream &InputStream)
 { 
 	InputStream>>x0;
 	InputStream>>y0;
@@ -33,29 +28,23 @@ void SanFunction::ReadFromStream(fstream &InputStream);
 	}
 }
 
-bool SanFunction::Function(float X, float Y);
+bool SanFunction::Function(float X, float Y)
 {
-	if (fabsf((X-x0)*(X-x0)/(A*A)+(Y-y0)*(Y-y0)/(B*B))<1.06)	{
-	cout<<true;
-	} else {
-	cout<<false; 
-	}
+	return absf((X-x0)*(X-x0)/(A*A)+(Y-y0)*(Y-y0)/(B*B))<1.06;
+	
 
 }
 
-void JorFunction::ReadFromStream(fstream &InputStream);
+void JorFunction::ReadFromStream(fstream &InputStream)
 { 
 	InputStream>>x0;
 	InputStream>>y0;
 	InputStream>>P;
 }
 
-bool JorFunction::Function(float X, float Y);
+bool JorFunction::Function(float X, float Y)
 {
-	if (fabsf((Y-y0)*(Y-y0)-2*p*(X-x0))<0.06)	{
-	cout<<true;
-	} else {
-	cout<<false; 
-	}
+	return absf((Y-y0)*(Y-y0)-2*p*(X-x0))<0.06;
+	
 
 }
