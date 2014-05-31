@@ -78,12 +78,17 @@ void CRender::DrawPicture(CPicture *pPicture)
 	pd = pPicture->GetData();
 	TPixel* data = new TPixel[600*600];
 
+	int count = 0;
 	for (int i = 0; i < 600; ++i)
 		for (int j = 0; j < 600; ++j)
 			{
 				data[i*600+j] = GetColor(pd[i][j]);
+				if (pd[i][j] != 0 )
+				 	{
+				 		i++;
+				 	} 	
 			};
-
+	cout << count;
 	glDrawPixels(600, 600, GL_RGB, GL_UNSIGNED_BYTE, data);
 	/*
 	// Create one OpenGL texture
