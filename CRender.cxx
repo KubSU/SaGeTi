@@ -14,49 +14,49 @@ inline TPixel GetColor(char color){
 		return TPixel(0,0,0);
 		break;
 		case 1:
-		return TPixel(0,0,0.5);
+		return TPixel(0,0,128);
 		break;
 		case 2:
-		return TPixel(0,0.5,0);
+		return TPixel(0,128,0);
 		break;
 		case 3:
-		return TPixel(0,0.5,0.5);
+		return TPixel(0,128,128);
 		break;
 		case 4:
-		return TPixel(0.5,0,0);
+		return TPixel(128,0,0);
 		break;
 		case 5:
-		return TPixel(0.5,0,0.5);
+		return TPixel(128,0,128);
 		break;
 		case 6:
-		return TPixel(0.5,0.5,0);
+		return TPixel(128,128,0);
 		break;
 		case 7:
-		return TPixel(0.5,0.5,0.5);
+		return TPixel(128,128,128);
 		break;
 		case 8:
-		return TPixel(0.25,0.25,0.25);
+		return TPixel(64,64,64);
 		break;
 		case 9:
-		return TPixel(0,0,1);
+		return TPixel(0,0,255);
 		break;
 		case 10:
-		return TPixel(0,1,0);
+		return TPixel(0,255,0);
 		break;
 		case 11:
-		return TPixel(0,1,1);
+		return TPixel(0,255,255);
 		break;
 		case 12:
-		return TPixel(1,0,0);
+		return TPixel(255,0,0);
 		break;
 		case 13:
-		return TPixel(1,0,1);
+		return TPixel(255,0,255);
 		break;
 		case 14:
-		return TPixel(1,1,0);
+		return TPixel(255,255,0);
 		break;
 		case 15:
-		return TPixel(1,1,1);
+		return TPixel(255,255,255);
 		break;
 	}
 	return TPixel();
