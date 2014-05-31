@@ -3,7 +3,7 @@
 
 
 struct TPixel{
-	char r,g,b;
+	GLubyte r,g,b;
 	TPixel(){};
 	TPixel(char nr, char ng, char nb){r=nr;b=nb;g=ng;}
 };
@@ -81,15 +81,15 @@ void CRender::DrawPicture(CPicture *pPicture)
 	int count = 0;
 	for (int i = 0; i < 600; ++i)
 		for (int j = 0; j < 600; ++j)
+		{
+			data[i*600+j] = GetColor(pd[i][j]);
+			if (pd[i][j] != 0 )
 			{
-				data[i*600+j] = GetColor(pd[i][j]);
-				if (pd[i][j] != 0 )
-				 	{
-				 		i++;
-				 	} 	
-			};
-	cout << count;
+				count++;
+			} 	
+		};
 	glDrawPixels(600, 600, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glFinish();
 	/*
 	// Create one OpenGL texture
 	GLuint textureID;
