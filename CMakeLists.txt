@@ -11,6 +11,8 @@ set(Sources
 
 set(Headers
 	IFunction.hxx
+	CRender.hxx
+	CPicture.hxx
 )
 
 add_executable(CourseTask ${Sources} ${Headers})
