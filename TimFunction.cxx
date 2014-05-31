@@ -44,7 +44,7 @@ void JorFunction::ReadFromStream(fstream &InputStream)
 
 bool JorFunction::Function(float X, float Y)
 {
-	return fabsf((Y-y0)*(Y-y0)-2*p*(X-x0))<0.06;
+	return fabsf((Y-y0)*(Y-y0)-2*P*(X-x0))<0.06;
 	
 
 }
