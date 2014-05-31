@@ -82,7 +82,7 @@ void CRender::DrawPicture(CPicture *pPicture)
 	for (int i = 0; i < 600; ++i)
 		for (int j = 0; j < 600; ++j)
 		{
-			data[i*600+j] = GetColor(pd[i][j]);
+			data[i+(599-j)*600] = GetColor(pd[i][j]);
 			if (pd[i][j] != 0 )
 			{
 				count++;
