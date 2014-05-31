@@ -1,4 +1,5 @@
 #include "TimFunction.hxx"
+#include <cmath>
 
 void TimFunction::ReadFromStream(fstream &InputStream)
 { 
@@ -13,7 +14,7 @@ void TimFunction::ReadFromStream(fstream &InputStream)
 
 bool TimFunction::Function(float X, float Y)
 {
-	return absf(A*absf(X)+B*Y+C)<0.06;
+	return fabsf(A*fabsf(X)+B*Y+C)<0.06;
 }
 
 void SanFunction::ReadFromStream(fstream &InputStream)
@@ -30,8 +31,7 @@ void SanFunction::ReadFromStream(fstream &InputStream)
 
 bool SanFunction::Function(float X, float Y)
 {
-	return absf((X-x0)*(X-x0)/(A*A)+(Y-y0)*(Y-y0)/(B*B))<1.06;
-	
+	return fabsf((X-x0)*(X-x0)/(A*A)+(Y-y0)*(Y-y0)/(B*B))<1.06;
 
 }
 
@@ -44,7 +44,7 @@ void JorFunction::ReadFromStream(fstream &InputStream)
 
 bool JorFunction::Function(float X, float Y)
 {
-	return absf((Y-y0)*(Y-y0)-2*p*(X-x0))<0.06;
+	return fabsf((Y-y0)*(Y-y0)-2*p*(X-x0))<0.06;
 	
 
 }
