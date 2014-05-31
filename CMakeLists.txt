@@ -7,6 +7,7 @@ add_subdirectory(glfw)
 
 set(Sources
 	main.cxx
+	CRender.cxx
 )
 
 set(Headers

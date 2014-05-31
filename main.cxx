@@ -1,8 +1,9 @@
 #include "glfw3.h"
+#include "CRender.hxx"
+#include "CPicture.hxx"
 
 bool _Running = true;
 GLFWwindow* window;
-
 
 void KeyboardCallback(GLFWwindow *window, int key, int scan, int action, int mods)
 {
