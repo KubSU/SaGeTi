@@ -9,6 +9,7 @@ set(Sources
 	main.cxx
 	CRender.cxx
 	CPicture.cxx
+	CGraph.cxx
 	TimFunction.cxx
 )
 
@@ -16,6 +17,7 @@ set(Headers
 	IFunction.hxx
 	CRender.hxx
 	CPicture.hxx
+	CGraph.hxx
 	TimFunction.hxx
 )
 
