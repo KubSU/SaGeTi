@@ -4,6 +4,8 @@
 
 bool _Running = true;
 GLFWwindow* window;
+CRender* render;
+CPicture* picture;
 
 void KeyboardCallback(GLFWwindow *window, int key, int scan, int action, int mods)
 {
@@ -15,7 +17,7 @@ void Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	
+	render->DrawPicture(picture);
 
 	glfwPollEvents();
 	glfwSwapBuffers(window);
@@ -23,7 +25,6 @@ void Render()
 
 void Update()
 {
-
 }
 
 void InitProjection()
@@ -38,6 +39,9 @@ void InitProjection()
 int main(int argc, char const *argv[])
 {
 	glfwInit();
+	
+	render = new CRender();
+	picture = new CPicture();
 
 	window = glfwCreateWindow(600, 600, "GL window", NULL, NULL);
 	glfwMakeContextCurrent(window);
