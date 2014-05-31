@@ -59,10 +59,13 @@ int main(int argc, char const *argv[])
 
 	{
 		fstream input;
-		input.open("input.txt");
+		input.open("input.txt", std::fstream::in);
 
-		graph->ReadFromFile(input);
-		function->ReadFromStream(input);
+		if (input.is_open())
+		{
+			graph->ReadFromFile(input);
+			function->ReadFromStream(input);
+		};
 
 		input.close();
 	};
