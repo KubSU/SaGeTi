@@ -2,6 +2,7 @@
 #include "CRender.hxx"
 #include "CPicture.hxx"
 #include "CGraph.hxx"
+#include "CModificators.hxx"
 #include "TimFunction.hxx"
 #include <iostream>
 #include <fstream>
@@ -14,6 +15,8 @@ CRender* render;
 CPicture* picture;
 CGraph* graph;
 IFunction* function;
+IModificator* modificator;
+
 
 void KeyboardCallback(GLFWwindow *window, int key, int scan, int action, int mods)
 {
@@ -34,6 +37,7 @@ void Render()
 void Update()
 {
 	picture->Update();
+	modificator->ChangeParam(1);
 	cout << glfwGetTime() << endl;
 }
 
@@ -55,7 +59,8 @@ int main(int argc, char const *argv[])
 	render = new CRender();
 	picture = new CPicture();
 	graph = new CGraph();
-	function = new JorFunction();
+	function = new TimFunction();
+	modificator = new CRotationModificator();
 
 	{
 		fstream input;
@@ -73,6 +78,7 @@ int main(int argc, char const *argv[])
 
 	picture->SetFunction(function);
 	picture->SetGraph(graph);
+	picture->SetModificator(modificator);
 	picture->Init();
 	
 	window = glfwCreateWindow(600, 600, "GL window", NULL, NULL);

@@ -1,5 +1,6 @@
 #include "CPicture.hxx"
 #include "CGraph.hxx"
+#include "IModificator.hxx"
 #include <cstring>
 #include <cmath>
 
@@ -45,7 +46,7 @@ void CPicture::Update()
 {
 	for (int i = 0; i < SIZE; i++)
 		for (int j = 0; j < SIZE; j++)
-			if (_Function->Function(i - HALF_SIZE, j - HALF_SIZE))
+			if (_Function->Function(_Modificator->GetTransformX(i - HALF_SIZE, j - HALF_SIZE), _Modificator->GetTransformY(i - HALF_SIZE, j - HALF_SIZE)))
 				_Graph->ApplyGraphToAr(i, j, _NewData, _OldData);
 	_SwapDataArrays();
 };
@@ -96,4 +97,8 @@ void CPicture::SetFunction(IFunction *Function)
 void CPicture::SetGraph(CGraph* Graph)
 {
 	_Graph = Graph;
+};
+void CPicture::SetModificator(IModificator* Modificator)
+{
+	_Modificator = Modificator;
 };

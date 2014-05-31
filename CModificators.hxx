@@ -12,7 +12,7 @@ public:
 		_Param = 0;
 	};
 
-	~CMoveRightModificator();
+	~CMoveRightModificator(){};
 	
 	float GetTransformX(float x, float y) 
 	{
@@ -28,7 +28,7 @@ public:
 		_Param = 0;
 	};
 
-	~CMoveUpModificator();
+	~CMoveUpModificator(){};
 	
 	float GetTransformY(float x, float y) 
 	{
@@ -44,7 +44,7 @@ public:
 		_Param = 1;
 	};
 
-	~CStretchXModificator();
+	~CStretchXModificator(){};
 	
 	float GetTransformX(float x, float y) 
 	{
@@ -60,7 +60,7 @@ public:
 		_Param = 1;
 	};
 
-	~CStretchYModificator();
+	~CStretchYModificator(){};
 	
 	float GetTransformY(float x, float y) 
 	{
@@ -76,7 +76,7 @@ public:
 		_Param = 0;
 	};
 
-	~CRotationModificator();
+	~CRotationModificator(){};
 	
 	float GetTransformX(float x, float y) 
 	{

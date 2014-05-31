@@ -19,6 +19,7 @@ struct TFunctionParameters2 {
 typedef char** TPictureData;
 
 class CGraph;
+class IModificator;
 
 class CPicture
 {
@@ -28,6 +29,7 @@ private:
 	
 	IFunction* _Function;
 	CGraph* _Graph;
+	IModificator* _Modificator;
 	
 	int FunctionCount;
 	TFunctionParameters* FunctionParameters;
@@ -45,6 +47,7 @@ public:
 	void SetFunction(IFunction* Function);
 	void SetGraph(CGraph* Graph);
 	void ReadBackgroundFunctions(fstream& Stream);
+	void SetModificator(IModificator* Modificator);
 };
 
 #endif
