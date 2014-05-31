@@ -8,10 +8,10 @@ CGraph::CGraph(){
 CGraph::~CGraph(){
 	
 };
-void CGraph::ApplyGraphToAr(int x,int y,TPictureData data){
+void CGraph::ApplyGraphToAr(int x,int y,TPictureData data,TPictureData olddata){
 	for (int i = 0; i < 4; ++i) {
 		if (ms[lovely_point][i]!=UNUSIFUL_EDGE) {
-			data[x+sm[i][0]][y+sm[i][1]] = (data[x][y]+data[x+sm[i][0]][y+sm[i][1]]+ms[lovely_point][i]) % 16;
+			data[x+sm[i][0]][y+sm[i][1]] = (olddata[x][y]+olddata[x+sm[i][0]][y+sm[i][1]]+ms[lovely_point][i]) % 16;
 		}
 	}
 };

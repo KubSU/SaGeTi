@@ -90,35 +90,6 @@ void CRender::DrawPicture(CPicture *pPicture)
 		};
 	glDrawPixels(600, 600, GL_RGB, GL_UNSIGNED_BYTE, data);
 	glFinish();
-	/*
-	// Create one OpenGL texture
-	GLuint textureID;
-	glGenTextures(1, &textureID);
-	// "Bind" the newly created texture : all future texture functions will modify this texture
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	 
-	// Give the image to OpenGL
-	glTexImage2D(GL_TEXTURE_2D, 0,3, 600, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	glColor3f(1,1,1);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0,0);
-	glVertex3f(0,0,0);
-	glTexCoord2f(0,1);
-	glVertex3f(0,1,0);
-	glTexCoord2f(1,1);
-	glVertex3f(1,1,0);
-	glTexCoord2f(1,0);
-	glVertex3f(1,0,0);
-	glEnd();
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glDeleteTextures(1,&textureID);
-*/
-
 	delete []data;
 
 };

@@ -45,8 +45,8 @@ void SanFunction::ReadFromStream(fstream &InputStream)
 
 SanFunction::SanFunction()
 {
-	A = 100;
-	B = 160;
+	A = 150;
+	B = 200;
 	x0 = 0;
 	y0 = 0;
 }
@@ -57,8 +57,12 @@ SanFunction::~SanFunction()
 
 bool SanFunction::Function(float X, float Y)
 {
-	int y = y0+sqrtf(-B*B*(((X-x0)*(X-x0)/(A*A))-1));
-	return y==Y;
+	
+	return 
+		((fabsf(-Y+y0+sqrtf(-B*B*(((X-x0)*(X-x0)/(A*A))-1))))<EPSILON)||
+		((fabsf(-X+x0+sqrtf(-A*A*(((Y-y0)*(Y-y0)/(B*B))-1))))<EPSILON)||
+		((fabsf(-Y+y0-sqrtf(-B*B*(((X-x0)*(X-x0)/(A*A))-1))))<EPSILON)||
+		((fabsf(-X+x0-sqrtf(-A*A*(((Y-y0)*(Y-y0)/(B*B))-1))))<EPSILON);
 
 }
 
@@ -71,8 +75,8 @@ void JorFunction::ReadFromStream(fstream &InputStream)
 
 JorFunction::JorFunction()
 {
-	x0 = 1;
-	y0 = 1;
+	x0 = -50;
+	y0 = -50;
 	P = 1;
 }
 
@@ -82,7 +86,8 @@ JorFunction::~JorFunction()
 
 bool JorFunction::Function(float X, float Y)
 {
-	return fabsf((Y-y0)*(Y-y0)-2*P*(X-x0)) < EPSILON;
-	
+	return 
+		fabsf(sqrtf(2*P*(X-x0))-Y+y0)<EPSILON||
+		fabsf(-sqrtf(2*P*(X-x0))-Y+y0)<EPSILON;
 
 }

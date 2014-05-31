@@ -45,7 +45,7 @@ int main(int argc, char const *argv[])
 	
 	render = new CRender();
 	picture = new CPicture();
-	picture->SetFunction(new SanFunction());
+	picture->SetFunction(new JorFunction());
 	picture->Init();
 	
 	window = glfwCreateWindow(600, 600, "GL window", NULL, NULL);
