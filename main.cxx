@@ -29,11 +29,13 @@ void Update()
 
 void InitProjection()
 {
-	float ratio;
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
-	ratio = width / (float) height;
 	glViewport(0, 0, width, height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, 1, 0, 1, -1, 1);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 int main(int argc, char const *argv[])
