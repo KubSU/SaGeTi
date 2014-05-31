@@ -1,6 +1,8 @@
 #include "TimFunction.hxx"
 #include <cmath>
 
+#define EPSILON 0.6
+
 void TimFunction::ReadFromStream(fstream &InputStream)
 { 
 	InputStream>>A;
@@ -26,7 +28,7 @@ TimFunction::~TimFunction()
 bool TimFunction::Function(float X, float Y)
 {
 	float res = A*fabsf(X)+B*Y+C;
-	return fabsf(res) < 0.6;
+	return fabsf(res) < EPSILON;
 }
 
 void SanFunction::ReadFromStream(fstream &InputStream)
@@ -43,8 +45,10 @@ void SanFunction::ReadFromStream(fstream &InputStream)
 
 SanFunction::SanFunction()
 {
-	A = 1;
-	B = 1;
+	A = 100;
+	B = 160;
+	x0 = 0;
+	y0 = 0;
 }
 
 SanFunction::~SanFunction()
@@ -53,7 +57,8 @@ SanFunction::~SanFunction()
 
 bool SanFunction::Function(float X, float Y)
 {
-	return fabsf((X-x0)*(X-x0)/(A*A)+(Y-y0)*(Y-y0)/(B*B))<1.06;
+	int y = y0+sqrtf(-B*B*(((X-x0)*(X-x0)/(A*A))-1));
+	return y==Y;
 
 }
 
@@ -77,7 +82,7 @@ JorFunction::~JorFunction()
 
 bool JorFunction::Function(float X, float Y)
 {
-	return fabsf((Y-y0)*(Y-y0)-2*P*(X-x0))<0.06;
+	return fabsf((Y-y0)*(Y-y0)-2*P*(X-x0)) < EPSILON;
 	
 
 }

@@ -1,6 +1,7 @@
 #include "CPicture.hxx"
 
 #define SIZE 600
+#define HALF_SIZE SIZE / 2
 
 CPicture::CPicture()
 {
@@ -43,7 +44,7 @@ void CPicture::_InitBackground()
 {
 	for (int i = 0; i < SIZE; i++)
 		for (int j = 0; j < SIZE; j++)
-			if (_Function->Function(i - 300, j - 300))
+			if (_Function->Function(i - HALF_SIZE, j - HALF_SIZE))
 				_NewData[i][j] = 15;
 			else
 				_NewData[i][j] = 0;
