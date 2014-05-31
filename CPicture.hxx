@@ -18,6 +18,7 @@ private:
 public:
 	CPicture();
 	~CPicture();
+	void Init();
 	TPictureData GetData();
 	void Update();
 	void SetFunction(IFunction* Function);

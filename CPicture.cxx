@@ -11,9 +11,12 @@ CPicture::CPicture()
 	_OldData = new char*[SIZE];
 	for (int i = 0; i < SIZE; i++)
 		_OldData[i] = new char[SIZE];
-	
-	_InitBackground();
 };
+
+void CPicture::Init()
+{
+	_InitBackground();
+}
 
 CPicture::~CPicture()
 {

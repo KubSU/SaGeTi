@@ -46,7 +46,8 @@ int main(int argc, char const *argv[])
 	render = new CRender();
 	picture = new CPicture();
 	picture->SetFunction(new TimFunction());
-
+	picture->Init();
+	
 	window = glfwCreateWindow(600, 600, "GL window", NULL, NULL);
 	glfwMakeContextCurrent(window);
 

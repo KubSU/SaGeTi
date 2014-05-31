@@ -25,7 +25,7 @@ TimFunction::~TimFunction()
 
 bool TimFunction::Function(float X, float Y)
 {
-	return fabsf(A*fabsf(X)+B*Y+C)<0.06;
+	return fabsf(A*fabsf(X)+B*Y+C)<0.6;
 }
 
 void SanFunction::ReadFromStream(fstream &InputStream)
