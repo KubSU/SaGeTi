@@ -84,6 +84,8 @@ void CRender::DrawPicture(CPicture *pPicture)
 				data[i*600+j] = GetColor(pd[i][j]);
 			};
 
+	glDrawPixels(600, 600, GL_RGB, GL_UNSIGNED_BYTE, data);
+	/*
 	// Create one OpenGL texture
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -91,7 +93,7 @@ void CRender::DrawPicture(CPicture *pPicture)
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	 
 	// Give the image to OpenGL
-	glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, 600, 600, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0,3, 600, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 	 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -110,6 +112,7 @@ void CRender::DrawPicture(CPicture *pPicture)
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDeleteTextures(1,&textureID);
+*/
 
 	delete []data;
 
