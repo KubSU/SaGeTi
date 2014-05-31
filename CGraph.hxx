@@ -16,6 +16,6 @@ public:
 	CGraph();
 	~CGraph();
 	void ApplyGraphToAr(int x,int y,TPictureData data, TPictureData olddata);
-	void ReadFromFile(std::fstream Stream);
+	void ReadFromFile(std::fstream &Stream);
 };
 #endif

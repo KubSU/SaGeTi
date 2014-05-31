@@ -1,12 +1,19 @@
 #include "glfw3.h"
 #include "CRender.hxx"
 #include "CPicture.hxx"
+#include "CGraph.hxx"
 #include "TimFunction.hxx"
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 
 bool _Running = true;
 GLFWwindow* window;
 CRender* render;
 CPicture* picture;
+CGraph* graph;
+IFunction* function;
 
 void KeyboardCallback(GLFWwindow *window, int key, int scan, int action, int mods)
 {
@@ -26,6 +33,8 @@ void Render()
 
 void Update()
 {
+	picture->Update();
+	cout << glfwGetTime() << endl;
 }
 
 void InitProjection()
@@ -45,7 +54,21 @@ int main(int argc, char const *argv[])
 	
 	render = new CRender();
 	picture = new CPicture();
-	picture->SetFunction(new JorFunction());
+	graph = new CGraph();
+	function = new JorFunction();
+
+	{
+		fstream input;
+		input.open("input.txt");
+
+		graph->ReadFromFile(input);
+		function->ReadFromStream(input);
+
+		input.close();
+	};
+
+	picture->SetFunction(function);
+	picture->SetGraph(graph);
 	picture->Init();
 	
 	window = glfwCreateWindow(600, 600, "GL window", NULL, NULL);
@@ -61,5 +84,10 @@ int main(int argc, char const *argv[])
 	}
 
 	glfwTerminate();
+
+	delete picture;
+	delete graph;
+	delete render;
+
 	return 0;
 }

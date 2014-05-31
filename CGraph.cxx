@@ -16,7 +16,7 @@ void CGraph::ApplyGraphToAr(int x,int y,TPictureData data,TPictureData olddata){
 	}
 };
 
-void CGraph::ReadFromFile(std::fstream Stream){
+void CGraph::ReadFromFile(std::fstream &Stream){
 	
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 4; ++j) {
