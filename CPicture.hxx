@@ -5,7 +5,8 @@
 
 struct TFunctionParameters {
 	//==============
-	float x,d,c;
+	float x,c;
+	int d;
 	//==============
 };
 

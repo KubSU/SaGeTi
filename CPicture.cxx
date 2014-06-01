@@ -72,8 +72,7 @@ void CPicture::ReadBackgroundFunctions(fstream& Stream){
 	for (int i = 0; i < FunctionCount; i++)
 	{
 		//============
-		Stream >> FunctionParameters[i].x;
-		Stream >> FunctionParameters[i].d >> FunctionParameters[i].c;
+		Stream >> FunctionParameters[i].x >> FunctionParameters[i].d >> FunctionParameters[i].c;
 		//============
 	}
 	//===========
@@ -90,12 +89,14 @@ void CPicture::_InitBackground()
 	{
 		for (int i = 0; i < SIZE; i++)
 			for (int j = 0; j < SIZE; j++)
-				if ((FunctionParameters2[0].A*sinf(FunctionParameters2[0].r*(j)-FunctionParameters2[0].phi)>i-500)&&
-					(FunctionParameters2[1].A*sinf(FunctionParameters2[1].r*(j)-FunctionParameters2[1].phi)<i-400))
+				if ((FunctionParameters2[0].A*sinf(FunctionParameters2[0].r*(i)-FunctionParameters2[0].phi)>j-550)&&
+					(FunctionParameters2[1].A*sinf(FunctionParameters2[1].r*(i)-FunctionParameters2[1].phi)<j-100)&&
+					((i)>FunctionParameters[k].x)&&
+					((i)<FunctionParameters[k].x+FunctionParameters[k].d))
 					_NewData[i][j] = FunctionParameters[k].c;
 	}
-	_SwapDataArrays();
 	//============
+	_SwapDataArrays();
 };
 
 void CPicture::_SwapDataArrays()
