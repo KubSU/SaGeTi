@@ -12,12 +12,16 @@
 CPicture::CPicture()
 {
 	_NewData = new char*[SIZE];
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < SIZE; i++){
 		_NewData[i] = new char[SIZE];
+		memset(_NewData[i],0,SIZE);
+		};
 	
 	_OldData = new char*[SIZE];
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < SIZE; i++){
 		_OldData[i] = new char[SIZE];
+		memset(_OldData[i],0,SIZE);
+	};
 	
 	_AvailableThreads = std::thread::hardware_concurrency();
 	FunctionParameters = 0;
