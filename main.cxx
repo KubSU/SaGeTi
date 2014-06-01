@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
 	render = new CRender();
 	picture = new CPicture();
 	graph = new CGraph();
-	graphicFunction = new JorFunction();
+	graphicFunction = new TimFunction();
 	modificator = new CRotationModificator();
 
 	{
