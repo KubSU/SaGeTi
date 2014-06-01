@@ -1,7 +1,7 @@
 #ifndef _PICTURE_H
 #define _PICTURE_H
 #include "IFunction.hxx"
-
+#include "CModificators.hxx"
 
 struct TFunctionParameters {
 	//==============
@@ -30,7 +30,8 @@ private:
 	
 	IFunction* _Function;
 	CGraph* _Graph;
-	IModificator* _Modificator;
+	IModificator* _Modificator1;
+	IModificator* _Modificator2;
 	
 	int _AvailableThreads;
 	
@@ -51,7 +52,7 @@ public:
 	void SetFunction(IFunction* Function);
 	void SetGraph(CGraph* Graph);
 	void ReadBackgroundFunctions(fstream& Stream);
-	void SetModificator(IModificator* Modificator);
+	void SetModificators();
 };
 
 #endif

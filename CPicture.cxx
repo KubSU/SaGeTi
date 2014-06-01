@@ -53,8 +53,8 @@ void CPicture::ThreadUpdate(int start, int end)
 {
 	for (int i = start; i < end; i++)
 		for (int j = 0; j < SIZE; j++)
-			if (_Function->Function(_Modificator->GetTransformX(i - HALF_SIZE, j - HALF_SIZE),
-										  _Modificator->GetTransformY(i - HALF_SIZE, j - HALF_SIZE)))
+			if (_Function->Function(_Modificator2->GetTransformX(i - HALF_SIZE, j - HALF_SIZE),
+										  _Modificator1->GetTransformY(i - HALF_SIZE, j - HALF_SIZE)))
 				_Graph->ApplyGraphToAr(i, j, _NewData, _OldData);
 };
 
@@ -68,6 +68,9 @@ void CPicture::Update()
 		th.join();
 	
 	_SwapDataArrays();
+	
+	_Modificator1->ChangeParam(0.02);
+	_Modificator2->ChangeParam(-0.02);
 };
 
 void CPicture::ReadBackgroundFunctions(fstream& Stream){
@@ -118,7 +121,8 @@ void CPicture::SetGraph(CGraph* Graph)
 {
 	_Graph = Graph;
 };
-void CPicture::SetModificator(IModificator* Modificator)
+void CPicture::SetModificators()
 {
-	_Modificator = Modificator;
+	_Modificator1 = new CStretchYModificator();
+	_Modificator2 = new CStretchXModificator();
 };

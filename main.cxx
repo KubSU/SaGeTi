@@ -15,7 +15,6 @@ CRender* render;
 CPicture* picture;
 CGraph* graph;
 IFunction* graphicFunction;
-IModificator* modificator;
 
 
 void KeyboardCallback(GLFWwindow *window, int key, int scan, int action, int mods)
@@ -37,7 +36,6 @@ void Render()
 void Update()
 {
 	picture->Update();
-	modificator->ChangeParam(0.1);
 	cout << glfwGetTime() << endl;
 }
 
@@ -60,7 +58,6 @@ int main(int argc, char const *argv[])
 	picture = new CPicture();
 	graph = new CGraph();
 	graphicFunction = new SanFunction();
-	modificator = new CRotationModificator();
 
 	{
 		fstream input;
@@ -78,7 +75,7 @@ int main(int argc, char const *argv[])
 
 	picture->SetFunction(graphicFunction);
 	picture->SetGraph(graph);
-	picture->SetModificator(modificator);
+	picture->SetModificators();
 	picture->Init();
 	
 	window = glfwCreateWindow(600, 600, "GL window", NULL, NULL);
