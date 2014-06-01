@@ -37,7 +37,7 @@ void Render()
 void Update()
 {
 	picture->Update();
-	modificator->ChangeParam(1);
+	modificator->ChangeParam(0.1);
 	cout << glfwGetTime() << endl;
 }
 
@@ -59,7 +59,7 @@ int main(int argc, char const *argv[])
 	render = new CRender();
 	picture = new CPicture();
 	graph = new CGraph();
-	function = new TimFunction();
+	function = new JorFunction();
 	modificator = new CRotationModificator();
 
 	{
