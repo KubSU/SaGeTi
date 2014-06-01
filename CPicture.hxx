@@ -31,6 +31,8 @@ private:
 	CGraph* _Graph;
 	IModificator* _Modificator;
 	
+	int _AvailableThreads;
+	
 	int FunctionCount;
 	TFunctionParameters* FunctionParameters;
 	//=============
@@ -44,6 +46,7 @@ public:
 	void Init();
 	TPictureData GetData();
 	void Update();
+	void ThreadUpdate(int start, int end);
 	void SetFunction(IFunction* Function);
 	void SetGraph(CGraph* Graph);
 	void ReadBackgroundFunctions(fstream& Stream);

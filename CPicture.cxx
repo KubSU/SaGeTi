@@ -3,6 +3,8 @@
 #include "IModificator.hxx"
 #include <cstring>
 #include <cmath>
+#include <thread>
+#include <vector>
 
 #define SIZE 600
 #define HALF_SIZE SIZE / 2
@@ -17,6 +19,7 @@ CPicture::CPicture()
 	for (int i = 0; i < SIZE; i++)
 		_OldData[i] = new char[SIZE];
 	
+	_AvailableThreads = std::thread::hardware_concurrency();
 	FunctionParameters = 0;
 	FunctionCount = 0;
 };
@@ -42,12 +45,24 @@ TPictureData CPicture::GetData()
 	return _OldData;
 };
 
+void CPicture::ThreadUpdate(int start, int end)
+{
+	for (int i = start; i < end; i++)
+		for (int j = 0; j < SIZE; j++)
+			if (_Function->Function(_Modificator->GetTransformX(i - HALF_SIZE, j - HALF_SIZE),
+										  _Modificator->GetTransformY(i - HALF_SIZE, j - HALF_SIZE)))
+				_Graph->ApplyGraphToAr(i, j, _NewData, _OldData);
+};
+
 void CPicture::Update()
 {
-	for (int i = 0; i < SIZE; i++)
-		for (int j = 0; j < SIZE; j++)
-			if (_Function->Function(_Modificator->GetTransformX(i - HALF_SIZE, j - HALF_SIZE), _Modificator->GetTransformY(i - HALF_SIZE, j - HALF_SIZE)))
-				_Graph->ApplyGraphToAr(i, j, _NewData, _OldData);
+	std::vector<thread> threads;
+	for (int i = 0; i < _AvailableThreads; i++)
+		threads.push_back(std::thread(&CPicture::ThreadUpdate, this, SIZE / _AvailableThreads * i, SIZE / _AvailableThreads * (i + 1)));
+	
+	for (auto &th : threads)
+		th.join();
+	
 	_SwapDataArrays();
 };
 

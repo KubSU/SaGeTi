@@ -14,7 +14,7 @@ GLFWwindow* window;
 CRender* render;
 CPicture* picture;
 CGraph* graph;
-IFunction* function;
+IFunction* graphicFunction;
 IModificator* modificator;
 
 
@@ -59,7 +59,7 @@ int main(int argc, char const *argv[])
 	render = new CRender();
 	picture = new CPicture();
 	graph = new CGraph();
-	function = new JorFunction();
+	graphicFunction = new JorFunction();
 	modificator = new CRotationModificator();
 
 	{
@@ -69,14 +69,14 @@ int main(int argc, char const *argv[])
 		if (input.is_open())
 		{
 			graph->ReadFromFile(input);
-			function->ReadFromStream(input);
+			graphicFunction->ReadFromStream(input);
 			picture->ReadBackgroundFunctions(input);
 		};
 
 		input.close();
 	};
 
-	picture->SetFunction(function);
+	picture->SetFunction(graphicFunction);
 	picture->SetGraph(graph);
 	picture->SetModificator(modificator);
 	picture->Init();

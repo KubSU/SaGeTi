@@ -20,6 +20,7 @@ set(Headers
 	CGraph.hxx
 	TimFunction.hxx
 )
+SET(CMAKE_CXX_FLAGS "-std=c++11")
 
 add_executable(CourseTask ${Sources} ${Headers})
 target_link_libraries(CourseTask glfw ${GLFW_LIBRARIES})
