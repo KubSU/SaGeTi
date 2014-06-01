@@ -36,8 +36,11 @@ void Render()
 
 void Update()
 {
-	picture->Update();
-	modificator->ChangeParam(0.1);
+	for (int i = 0; i < 1; i++)
+	{
+		picture->Update();
+		modificator->ChangeParam(0.05);
+	}
 	cout << glfwGetTime() << endl;
 }
 

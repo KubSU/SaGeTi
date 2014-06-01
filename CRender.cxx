@@ -62,6 +62,62 @@ inline TPixel GetColor(char color){
 	return TPixel();
 };
 
+/*
+inline TPixel GetColor(char color){
+	switch(color){
+		case 0:
+		return TPixel(0,0,0);
+		break;
+		case 1:
+		return TPixel(16,16,16);
+		break;
+		case 2:
+		return TPixel(32,32,32);
+		break;
+		case 3:
+		return TPixel(48,48,48);
+		break;
+		case 4:
+		return TPixel(64,64,64);
+		break;
+		case 5:
+		return TPixel(80,80,80);
+		break;
+		case 6:
+		return TPixel(96,96,96);
+		break;
+		case 7:
+		return TPixel(112,112,112);
+		break;
+		case 8:
+		return TPixel(128,128,128);
+		break;
+		case 9:
+		return TPixel(144,144,144);
+		break;
+		case 10:
+		return TPixel(160,160,160);
+		break;
+		case 11:
+		return TPixel(176,176,176);
+		break;
+		case 12:
+		return TPixel(192,192,192);
+		break;
+		case 13:
+		return TPixel(208,208,208);
+		break;
+		case 14:
+		return TPixel(224,224,224);
+		break;
+		case 15:
+		return TPixel(255,255,255);
+		break;
+	}
+	return TPixel();
+};
+*/
+
 CRender::CRender()
 {
 	

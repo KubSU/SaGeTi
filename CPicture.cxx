@@ -55,7 +55,10 @@ void CPicture::ThreadUpdate(int start, int end)
 		for (int j = 0; j < SIZE; j++)
 			if (_Function->Function(_Modificator->GetTransformX(i - HALF_SIZE, j - HALF_SIZE),
 										  _Modificator->GetTransformY(i - HALF_SIZE, j - HALF_SIZE)))
+			{
+				_NewData[i][j] = 15;
 				_Graph->ApplyGraphToAr(i, j, _NewData, _OldData);
+			}
 };
 
 void CPicture::Update()
