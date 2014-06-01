@@ -1,12 +1,9 @@
 #include "CRender.hxx"
 #include "glfw3.h"
+#include <thread>
+#include <vector>
 
-
-struct TPixel{
-	GLubyte r,g,b;
-	TPixel(){};
-	TPixel(char nr, char ng, char nb){r=nr;b=nb;g=ng;}
-};
+#define SIZE 600
 
 inline TPixel GetColor(char color){
 	switch(color){
@@ -120,7 +117,7 @@ inline TPixel GetColor(char color){
 
 CRender::CRender()
 {
-	
+	_AvailableThreads = std::thread::hardware_concurrency();
 };
 
 CRender::~CRender()
@@ -128,23 +125,27 @@ CRender::~CRender()
 	
 };
 
+void CRender::_ThreadUpdate(TPixel* data, TPictureData picture, int start, int end)
+{
+	for (int i = start; i < end; ++i)
+		for (int j = 0; j < SIZE; ++j)
+			data[i+(SIZE-1-j)*SIZE] = GetColor(picture[i][j]);
+};
+
 void CRender::DrawPicture(CPicture *pPicture)
 {
 	TPictureData pd;
 	pd = pPicture->GetData();
-	TPixel* data = new TPixel[600*600];
+	TPixel* data = new TPixel[SIZE*SIZE];
 
-	int count = 0;
-	for (int i = 0; i < 600; ++i)
-		for (int j = 0; j < 600; ++j)
-		{
-			data[i+(599-j)*600] = GetColor(pd[i][j]);
-			if (pd[i][j] != 0 )
-			{
-				count++;
-			} 	
-		};
-	glDrawPixels(600, 600, GL_RGB, GL_UNSIGNED_BYTE, data);
+	std::vector<thread> threads;
+	for (int i = 0; i < _AvailableThreads; i++)
+		threads.push_back(std::thread(&CRender::_ThreadUpdate, this, data, pd, SIZE / _AvailableThreads * i, SIZE / _AvailableThreads * (i + 1)));
+	
+	for (auto &th : threads)
+		th.join();
+	
+	glDrawPixels(SIZE, SIZE, GL_RGB, GL_UNSIGNED_BYTE, data);
 	glFinish();
 
 	delete []data;
