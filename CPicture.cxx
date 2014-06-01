@@ -93,8 +93,8 @@ void CPicture::_InitBackground()
 	{
 		for (int i = 0; i < SIZE; i++)
 			for (int j = 0; j < SIZE; j++)
-				if ((FunctionParameters2[0].A*sinf(FunctionParameters2[0].r*(i)-FunctionParameters2[0].phi)>j-550)&&
-					(FunctionParameters2[1].A*sinf(FunctionParameters2[1].r*(i)-FunctionParameters2[1].phi)<j-100)&&
+				if ((FunctionParameters2[0].A*sinf(FunctionParameters2[0].r*(i/10.0)-FunctionParameters2[0].phi)>j-550)&&
+					(FunctionParameters2[1].A*sinf(FunctionParameters2[1].r*(i/10.0)-FunctionParameters2[1].phi)<j-100)&&
 					((i)>FunctionParameters[k].x)&&
 					((i)<FunctionParameters[k].x+FunctionParameters[k].d))
 					_NewData[i][j] = FunctionParameters[k].c;
