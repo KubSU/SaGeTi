@@ -15,7 +15,8 @@ CRender* render;
 CPicture* picture;
 CGraph* graph;
 IFunction* graphicFunction;
-IModificator* modificator;
+IModificator* modificator1;
+IModificator* modificator2;
 
 
 void KeyboardCallback(GLFWwindow *window, int key, int scan, int action, int mods)
@@ -36,10 +37,12 @@ void Render()
 
 void Update()
 {
+	const float delta = 1; 
 	for (int i = 0; i < 1; i++)
 	{
 		picture->Update();
-		modificator->ChangeParam(0.05);
+		modificator1->ChangeParam(delta);
+		modificator2->ChangeParam(-delta);
 	}
 	cout << glfwGetTime() << endl;
 }
@@ -63,7 +66,8 @@ int main(int argc, char const *argv[])
 	picture = new CPicture();
 	graph = new CGraph();
 	graphicFunction = new JorFunction();
-	modificator = new CRotationModificator();
+	modificator1 = new CMoveRightModificator();
+	modificator2 = new CMoveRightModificator();
 
 	{
 		fstream input;
@@ -81,7 +85,8 @@ int main(int argc, char const *argv[])
 
 	picture->SetFunction(graphicFunction);
 	picture->SetGraph(graph);
-	picture->SetModificator(modificator);
+	picture->AddModificator(modificator1);
+	picture->AddModificator(modificator2);
 	picture->Init();
 	
 	window = glfwCreateWindow(600, 600, "GL window", NULL, NULL);
@@ -101,6 +106,8 @@ int main(int argc, char const *argv[])
 	delete picture;
 	delete graph;
 	delete render;
+	delete modificator1;
+	delete modificator2;
 
 	return 0;
 }
