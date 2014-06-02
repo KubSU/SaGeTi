@@ -1,27 +1,14 @@
 #include "IFunction.hxx"
 
-class TimFunction : public IFunction
+class EllipseFunction : public IBackgroundFunction
 {
 public:
-	TimFunction();
-	~TimFunction();
+	EllipseFunction();
+	~EllipseFunction();
 	void ReadFromStream(fstream &InputStream);
 	bool Function(float X, float Y);
 private:
-	float A,B,C; 
-
-};
-
-class SanFunction : public IFunction
-{
-public:
-	SanFunction();
-	~SanFunction();
-	void ReadFromStream(fstream &InputStream);
-	bool Function(float X, float Y);
-private:
-	float x0,y0,A,B; 
-
+	float x0,y0,A,B;
 };
 
 class JorFunction : public IFunction

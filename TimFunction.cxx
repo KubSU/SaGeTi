@@ -1,49 +1,18 @@
 #include "TimFunction.hxx"
 #include <cmath>
 
-#define EPSILON 0.6
+#define EPSILON 1.5
 
-void TimFunction::ReadFromStream(fstream &InputStream)
-{ 
-	InputStream>>A;
-	InputStream>>B;
-	InputStream>>C;
-		if ( A==0 && B==0 && C!=0)
-	{
-		//Error >_<
-	}
-}
-
-TimFunction::TimFunction()
-{
-	A = 1;
-	B = 1;
-	C = 0;
-}
-
-TimFunction::~TimFunction()
-{
-}
-
-bool TimFunction::Function(float X, float Y)
-{
-	float res = A*fabsf(X)+B*Y+C;
-	return fabsf(res) < EPSILON;
-}
-
-void SanFunction::ReadFromStream(fstream &InputStream)
+void EllipseFunction::ReadFromStream(fstream &InputStream)
 { 
 	InputStream>>x0;
 	InputStream>>y0;
 	InputStream>>A;
 	InputStream>>B;
-		if ( A==0 || B==0 )
-	{
-		//Error >_<
-	}
+	InputStream>>Color;
 }
 
-SanFunction::SanFunction()
+EllipseFunction::EllipseFunction()
 {
 	A = 150;
 	B = 200;
@@ -51,19 +20,14 @@ SanFunction::SanFunction()
 	y0 = 0;
 }
 
-SanFunction::~SanFunction()
+EllipseFunction::~EllipseFunction()
 {
 }
 
-bool SanFunction::Function(float X, float Y)
+bool EllipseFunction::Function(float X, float Y)
 {
-	
-	return 
-		((fabsf(-Y+y0+sqrtf(-B*B*(((X-x0)*(X-x0)/(A*A))-1))))<EPSILON)||
-		((fabsf(-X+x0+sqrtf(-A*A*(((Y-y0)*(Y-y0)/(B*B))-1))))<EPSILON)||
-		((fabsf(-Y+y0-sqrtf(-B*B*(((X-x0)*(X-x0)/(A*A))-1))))<EPSILON)||
-		((fabsf(-X+x0-sqrtf(-A*A*(((Y-y0)*(Y-y0)/(B*B))-1))))<EPSILON);
-
+	float temp = pow(X - x0, 2) / (A * A) + pow(Y - y0, 2) / (B * B);
+	return temp <= 1;
 }
 
 void JorFunction::ReadFromStream(fstream &InputStream)
@@ -86,8 +50,7 @@ JorFunction::~JorFunction()
 
 bool JorFunction::Function(float X, float Y)
 {
-	return 
-		fabsf(sqrtf(2*P*(X-x0))-Y+y0)<EPSILON||
-		fabsf(-sqrtf(2*P*(X-x0))-Y+y0)<EPSILON;
-
+	return fabsf(sqrtf(2*P*(X-x0))-Y+y0) < EPSILON || fabsf(-sqrtf(2*P*(X-x0))-Y+y0) < EPSILON ||
+		   fabsf(pow(Y - y0, 2) * 0.5 / P + x0 - X) < EPSILON;
+	//return fabsf(pow(Y - y0, 2) - 2 * P * (X - x0)) < P;
 }
