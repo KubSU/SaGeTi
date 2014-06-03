@@ -37,14 +37,13 @@ void Render()
 
 void Update()
 {
-	const float delta = 1; 
+	const float delta = 2; 
 	for (int i = 0; i < 1; i++)
 	{
 		picture->Update();
 		modificator1->ChangeParam(delta);
 		modificator2->ChangeParam(-delta);
 	}
-	cout << glfwGetTime() << endl;
 }
 
 void InitProjection()

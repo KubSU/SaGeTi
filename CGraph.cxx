@@ -6,7 +6,9 @@ CGraph::CGraph(){
 	
 };
 CGraph::~CGraph(){
-	
+	for (int i = 0; i < size; i++)
+		delete [] ms[i];
+	delete [] ms;
 };
 void CGraph::ApplyGraphToAr(int x,int y,TPictureData data,TPictureData olddata){
 	for (int i = 0; i < 4; ++i) {
@@ -21,9 +23,32 @@ void CGraph::ApplyGraphToAr(int x,int y,TPictureData data,TPictureData olddata){
 
 void CGraph::ReadFromFile(std::fstream &Stream){
 	
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 4; ++j) {
-			Stream >> ms[i][j];
+	// Getting length
+	char temp[256];
+	size = 0;
+	Stream.getline(temp, 256, '\n');
+	for (int i = 0; temp[i] != 0; i++)
+		if (temp[i] == ' ')
+			size++;
+	size++;
+	Stream.seekg(0);
+
+	ms = new int*[size];
+	for (int i = 0; i < size; ++i) {
+		ms[i] = new int[size];
+		for (int j = 0; j < size; ++j) {
+			char t;
+			Stream >> t;
+			if (t == '-')
+			{
+				Stream.ignore();
+				ms[i][j] = UNUSIFUL_EDGE;
+			} 
+			else 
+			{
+				Stream.seekg(Stream.tellg() - (std::streampos)1);
+				Stream >> ms[i][j];
+			}
 		}
 	}
 	

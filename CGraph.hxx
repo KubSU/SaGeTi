@@ -6,12 +6,13 @@
 typedef char** TPictureData;
 
 class CGraph {
-	int ms[4][4];
+	int** ms;
 	int mr[4][4];
 	int lovely_point;
 	int sm[4][2];
 	int lovely_point_x;
 	int lovely_point_y;
+	int size;
 public:
 	CGraph();
 	~CGraph();

@@ -1,7 +1,7 @@
 #include "TimFunction.hxx"
 #include <cmath>
 
-#define EPSILON 1.5
+#define EPSILON 1.9
 
 void EllipseFunction::ReadFromStream(fstream &InputStream)
 { 

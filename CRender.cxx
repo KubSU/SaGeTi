@@ -146,7 +146,7 @@ void CRender::DrawPicture(CPicture *pPicture)
 		th.join();
 	
 	glDrawPixels(SIZE, SIZE, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glFinish();
+	//glFinish();
 
 	delete []data;
 };
