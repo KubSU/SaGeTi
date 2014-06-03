@@ -18,6 +18,7 @@ set(Headers
 	CRender.hxx
 	CPicture.hxx
 	CGraph.hxx
+	CModificators.hxx
 	TimFunction.hxx
 )
 SET(CMAKE_CXX_FLAGS "-std=c++11")

@@ -1,6 +1,7 @@
 #include "CPicture.hxx"
 #include "CGraph.hxx"
 #include "IModificator.hxx"
+#include "TimFunction.hxx"
 #include <cstring>
 #include <cmath>
 #include <thread>
@@ -24,7 +25,6 @@ CPicture::CPicture()
 	};
 	
 	_AvailableThreads = std::thread::hardware_concurrency();
-	FunctionParameters = 0;
 	FunctionCount = 0;
 };
 
@@ -53,12 +53,12 @@ void CPicture::ThreadUpdate(int start, int end)
 {
 	for (int i = start; i < end; i++)
 		for (int j = 0; j < SIZE; j++)
-			if (_Function->Function(_Modificator->GetTransformX(i - HALF_SIZE, j - HALF_SIZE),
-										  _Modificator->GetTransformY(i - HALF_SIZE, j - HALF_SIZE)))
-			{
-				_NewData[i][j] = 15;
-				_Graph->ApplyGraphToAr(i, j, _NewData, _OldData);
-			}
+			for (auto mod : _Modificators)
+ 				if (_Function->Function(mod->GetTransformX(i - HALF_SIZE, j - HALF_SIZE),
+ 										mod->GetTransformY(i - HALF_SIZE, j - HALF_SIZE)))
+ 				{
+ 					_Graph->ApplyGraphToAr(i, j, _NewData, _OldData);
+ 				}
 };
 
 void CPicture::Update()
@@ -75,34 +75,26 @@ void CPicture::Update()
 
 void CPicture::ReadBackgroundFunctions(fstream& Stream){
 	Stream >> FunctionCount;
-	FunctionParameters = new TFunctionParameters[FunctionCount];
+
 	for (int i = 0; i < FunctionCount; i++)
 	{
-		//============
-		Stream >> FunctionParameters[i].x >> FunctionParameters[i].d >> FunctionParameters[i].c;
-		//============
+		IBackgroundFunction* temp = new LineFunction();
+ 		temp->ReadFromStream(Stream);
+ 		_BackgroundFuncs.push_back(temp);
 	}
-	//===========
-	Stream >> FunctionParameters2[1].A >> FunctionParameters2[1].phi >> FunctionParameters2[1].r;
-	Stream >> FunctionParameters2[0].A >> FunctionParameters2[0].phi >> FunctionParameters2[0].r;
-	//===========
 	
 };
 
 void CPicture::_InitBackground()
 {
-	//============
-	for (int k = 0; k < FunctionCount; k++)
-	{
-		for (int i = 0; i < SIZE; i++)
-			for (int j = 0; j < SIZE; j++)
-				if ((FunctionParameters2[0].A*sinf(FunctionParameters2[0].r*(i/10.0)-FunctionParameters2[0].phi)>j-550)&&
-					(FunctionParameters2[1].A*sinf(FunctionParameters2[1].r*(i/10.0)-FunctionParameters2[1].phi)<j-100)&&
-					((i)>FunctionParameters[k].x)&&
-					((i)<FunctionParameters[k].x+FunctionParameters[k].d))
-					_NewData[i][j] = FunctionParameters[k].c;
-	}
-	//============
+	for (int i = 0; i < SIZE; i++)
+ 		for (int j = 0; j < SIZE; j++)
+ 			for (int k = 0; k < FunctionCount; k++)
+ 				if (_BackgroundFuncs[k]->Function(i, j))
+ 					_NewData[i][j] = _BackgroundFuncs[k]->Color;
+ 	for (auto func : _BackgroundFuncs)
+ 		delete func;
+ 	_BackgroundFuncs.clear();
 	_SwapDataArrays();
 };
 
@@ -112,16 +104,17 @@ void CPicture::_SwapDataArrays()
 		memcpy(_OldData[i], _NewData[i], SIZE);
 };
 
-void CPicture::SetFunction(IFunction *Function)
-{
-	_Function = Function;
-};
+
+ void CPicture::SetFunction(IFunction *Function)
+  {
+  	_Function = Function;
+  };
 
 void CPicture::SetGraph(CGraph* Graph)
 {
 	_Graph = Graph;
 };
-void CPicture::SetModificator(IModificator* Modificator)
+void CPicture::AddModificator(IModificator* Modificator)
 {
-	_Modificator = Modificator;
+	_Modificators.push_back(Modificator);
 };

@@ -12,27 +12,16 @@ private:
 
 };
 
-class SanFunction : public IFunction
+class LineFunction : public IBackgroundFunction
 {
 public:
-	SanFunction();
-	~SanFunction();
+	LineFunction();
+ 	~LineFunction();
 	void ReadFromStream(fstream &InputStream);
 	bool Function(float X, float Y);
 private:
-	float x0,y0,A,B; 
+	float A,B,C; 
 
 };
 
-class JorFunction : public IFunction
-{
-public:
-	JorFunction();
-	~JorFunction();
-	void ReadFromStream(fstream &InputStream);
-	bool Function(float X, float Y);
-private:
-	float x0,y0,P; 
-
-};
 

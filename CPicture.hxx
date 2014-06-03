@@ -1,21 +1,13 @@
 #ifndef _PICTURE_H
 #define _PICTURE_H
 #include "IFunction.hxx"
+#include <vector>
 
 
 struct TFunctionParameters {
-	//==============
-	float x,c;
-	int d;
-	//==============
+	float x0, y0, A, B;
+ 	int color;
 };
-
-//==============
-struct TFunctionParameters2 {
-	
-	float A, phi, r;
-};
-//==============
 
 typedef char** TPictureData;
 
@@ -30,15 +22,12 @@ private:
 	
 	IFunction* _Function;
 	CGraph* _Graph;
-	IModificator* _Modificator;
+	std::vector<IModificator*> _Modificators;
 	
 	int _AvailableThreads;
 	
 	int FunctionCount;
-	TFunctionParameters* FunctionParameters;
-	//=============
-	TFunctionParameters2 FunctionParameters2[2];
-	//=============
+	std::vector<IBackgroundFunction*> _BackgroundFuncs;
 	void _InitBackground();
 	void _SwapDataArrays();
 public:
@@ -51,7 +40,7 @@ public:
 	void SetFunction(IFunction* Function);
 	void SetGraph(CGraph* Graph);
 	void ReadBackgroundFunctions(fstream& Stream);
-	void SetModificator(IModificator* Modificator);
+	void AddModificator(IModificator* Modificator);
 };
 
 #endif
