@@ -4,6 +4,7 @@
 #include "IModificator.hxx"
 #include <cmath>
 
+/// Модификатор перемещения вправо-влево.
 class CMoveRightModificator : public IModificator
 {
 public:
@@ -20,6 +21,7 @@ public:
 	};
 };
 
+/// Модификатор перемещения вверх-вниз.
 class CMoveUpModificator : public IModificator
 {
 public:
@@ -36,6 +38,7 @@ public:
 	};
 };
 
+/// Модификатор растяжения-сжатия по X.
 class CStretchXModificator : public IModificator
 {
 public:
@@ -52,6 +55,7 @@ public:
 	};
 };
 
+/// Модификатор растяжения-сжатия по Y.
 class CStretchYModificator : public IModificator
 {
 public:
@@ -68,6 +72,7 @@ public:
 	};
 };
 
+/// Модификатор поворота.
 class CRotationModificator : public IModificator
 {
 public:
